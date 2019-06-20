@@ -35,10 +35,11 @@ def hex2bin(in_file, out_file):
     if a == '':
       done = 1 # EOF
     else:
-      if a == '\r' or a == '\n' or a == ' ' and have_token:
-        have_token = 0
-        out_file.write(chr(cur))
-        cur = 0
+      if a == '\r' or a == '\n' or a == ' ':
+        if have_token:
+            have_token = 0
+            out_file.write(chr(cur))
+            cur = 0
       else:
         have_token = 1
         cur = cur * 16 + int(a, 16)
